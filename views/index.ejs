@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>
+        The Dojo Message Board
+    </h1>
+    <form method="POST" action="/newMessage">
+        <div>
+            <label for="name">
+                Name: 
+            </label>
+            <input type="text" id="name" name="name" />
+        </div>
+        <div>
+            <label for="message">
+                Message: 
+            </label>
+            <textarea name="message" id="message" cols="30" rows="10"></textarea>
+        </div>
+        <button type="submit">
+            Post Message
+        </button>
+    </form>
+    <ul>
+        <% for( let i = 0; i < users.length; i ++ ){ %>
+            <li>
+                Name: <%= users[i].name %> 
+            </li>
+            <li> Message: <%= users[i].message %></li>
+                <ol>
+                    <% for( let j = 0; j < users[i].comments.length; j ++ ){ %>
+                    <li>
+                        Name: <%= users[i].comments[j].name %> 
+                    </li>
+                    <li>
+                        Comment:<%= users[i].comments[j].comment %>
+                    </li>
+                    <% } %>
+                </ol>
+            
+                
+            <form method="POST" action="/newComment/">
+                <label for=""><b>Add a comment</b></label>
+                <div>
+                    <label for="name">
+                        Name: 
+                    </label>
+                    <input type="text" id="name" name="name" />
+                </div>
+                <div>
+                    <label for="comment">
+                        Comment: 
+                    </label>
+                    <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+                    <input type="hidden" name="MessageId" value="<%= users[i].id%>">
+                </div>
+                <button type="submit">
+                    Post Comment
+                </button>
+            </form>
+            
+        <% } %>
+    </ul>
+    
+</body>
+</html>
